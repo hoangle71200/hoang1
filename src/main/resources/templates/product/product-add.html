@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+</head>
+<body>
+    <h1>Các thuộc tính có dấu * là bắt buộc</h1>
+    <form th:action="@{/product/create}" th:object="${product}" method="post">
+        <p>Tên Sản phẩm</p>
+        <input type="text" th:field="*{name}" placeholder="Nhập tên sản phẩm">
+        <p>Giá bắt đầu</p>
+        <input type="text" th:field="*{price}" placeholder="Nhập giá bắt đầu">
+        <select th:field="*{type}">
+            <option th:each="item : ${typeList}"
+                    th:value="${item.id}"
+                    th:text="${item.name}"></option>
+        </select>
+        <button type="submit">Thêm sản phẩm</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <p>Quản lý Sản Phẩm</p>
+            <a th:href="@{/product/addForm}" class="btn-primary">Thêm Sản Phẩm</a>
+        </div>
+            <div>
+                <h1>Tìm Kiếm Sản Phẩm</h1>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá Bắt Đầu</th>
+                        <th>Loại Sản Phẩm</th>
+                        <th>Xóa Tìm Kiếm</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                        <form th:action="@{/product/search}" th:object="${product}">
+                            <td>
+                                <input type="text" th:field="${name}" placeholder="Nhập tên sản phẩm">
+                            </td>
+                            <td>
+                                <input type="text" th:field="${price}" placeholder="Nhập giá bắt đầu">
+                            </td>
+                            <td>
+                                <select th:field="*{type}">
+                                    <option th:each="item : ${typeList}"
+                                            th:value="${item.id}"
+                                            th:text="${item.name}"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="reset">
+                            </td>
+                            <td>
+                                <button type="submit">Tìm</button>
+                            </td>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        <div>
+
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Chọn</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá Bắt Đầu</th>
+                    <th>Loại Sản Phẩm</th>
+                    <th>Tình Trạng</th>
+                    <th>Hành Động</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item: ${productList}">
+                        <td th:text="${item.id}"></td>
+                        <td></td>
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.price}"></td>
+                        <td th:text="${item.getType().name}"></td>
+                        <td th:text="${item.status}"></td>
+                        <td>
+                            <a th:href="@{/product/edit/__${item.id}__}">
+                                <span>Sửa</span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
